@@ -50,6 +50,8 @@ public class LocalBitcoinAction {
      *   @param clientSecret -
      */
     public LocalBitcoinAction(String clientID, String clientSecret){
+        if (clientID==null || clientID.equals("")) throw new NullPointerException("clientID not set");
+        if (clientSecret==null || clientSecret.equals("")) throw new NullPointerException("clientSecret not set");
         this.clientID=clientID;
         this.clientSecret=clientSecret;
     }
@@ -260,12 +262,16 @@ public class LocalBitcoinAction {
         connection = (HttpURLConnection) url.openConnection();
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod("POST");
 
         request = new OutputStreamWriter(connection.getOutputStream());
         request.write(parameters);
         request.flush();
         request.close();
+
+        Log.d(TAG, "URL: "+url);
+        Log.d(TAG, "Params "+parameters);
+
         String line = "";
         InputStreamReader isr = new InputStreamReader(connection.getInputStream());
         BufferedReader reader = new BufferedReader(isr);

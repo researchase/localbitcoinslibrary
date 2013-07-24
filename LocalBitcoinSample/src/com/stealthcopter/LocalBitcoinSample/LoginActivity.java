@@ -58,9 +58,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 // localBitcoinAction.connect(accessToken);
 
                 if (accessToken!=null){
+                    App.get().saveAccessToken(accessToken);
+
                     // We are logged in, start EscrowActivity
                     Intent intent = new Intent(LoginActivity.this, EscrowActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }

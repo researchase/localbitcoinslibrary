@@ -1,8 +1,12 @@
 package com.stealthcopter.LocalBitcoinSample;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import com.stealthcopter.localbitcoinslibrary.LocalBitcoinAction;
 import com.stealthcopter.localbitcoinslibrary.Objects.AccessToken;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +18,11 @@ import com.stealthcopter.localbitcoinslibrary.Objects.AccessToken;
 public class App extends Application {
 
     // TODO: Replace with your own ClientID and ClientSecret
-    static final String CLIENT_ID = "";
-    static final String CLIENT_SECRET = "";
+    static final String CLIENT_ID = "b7465c4ad54f81b371dd";
+    static final String CLIENT_SECRET = "5446b879cccd66a94be8491bf82dfcff4ba00832";
 
     static final boolean TEST_MODE=true;
+    private static final String PREFS_ACCESS_TOKEN = "PREFS_ACCESS_TOKEN";
 
     private LocalBitcoinAction localBitcoinAction;
     private static App instance;
@@ -35,6 +40,31 @@ public class App extends Application {
             if (TEST_MODE) localBitcoinAction.setTestMode(TEST_MODE);
         }
         return localBitcoinAction;
+    }
+
+    public AccessToken getAccessToken(){
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String json = mPrefs.getString(PREFS_ACCESS_TOKEN,null);
+        if (json!=null){
+            try {
+                return new AccessToken(new JSONObject(json));
+            } catch (JSONException e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public void saveAccessToken(AccessToken accessToken){
+        if (accessToken==null) return;
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs.edit().putString(PREFS_ACCESS_TOKEN, accessToken.toJSON().toString()).commit();
+    }
+
+    public void removeAccessToken() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs.edit().remove(PREFS_ACCESS_TOKEN).commit();
     }
 
 }
