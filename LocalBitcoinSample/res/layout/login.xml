@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="10dip"
+        >
+
+     <!--LoginBox-->
+     <LinearLayout
+             android:id="@+id/loginBox"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             >
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginMessage"
+                android:textColor="#f00"
+                android:textStyle="bold"
+                />
+
+         <TextView
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/loginMessage"
+                 android:text="Login with you localbitcoins.com account"
+                 android:padding="10dip"
+                 />
+
+         <EditText
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:hint="Username"
+                android:singleLine="true"
+                />
+
+        <EditText
+                android:id="@+id/password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:hint="Password"
+                android:imeActionLabel="Login"
+                />
+
+        <Button
+                android:id="@+id/connectButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                />
+
+         <TextView
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/loginMessage"
+                 android:text="Or sign up for a new account"
+                 android:padding="10dip"
+                 />
+
+         <Button
+                 android:id="@+id/registerButton"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:text="Register"
+                 />
+
+     </LinearLayout>
+    <!--End LoginBox-->
+
+</LinearLayout>
+
