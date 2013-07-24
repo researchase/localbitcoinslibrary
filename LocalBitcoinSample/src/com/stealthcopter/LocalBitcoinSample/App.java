@@ -21,7 +21,7 @@ public class App extends Application {
     static final String CLIENT_ID = "b7465c4ad54f81b371dd";
     static final String CLIENT_SECRET = "5446b879cccd66a94be8491bf82dfcff4ba00832";
 
-    static final boolean TEST_MODE=true;
+    static final boolean TEST_MODE=false;
     private static final String PREFS_ACCESS_TOKEN = "PREFS_ACCESS_TOKEN";
 
     private LocalBitcoinAction localBitcoinAction;
@@ -37,6 +37,7 @@ public class App extends Application {
     public LocalBitcoinAction getLocalBitcoinsAction(){
         if (localBitcoinAction==null){
             localBitcoinAction=new LocalBitcoinAction(CLIENT_ID, CLIENT_SECRET);
+            if (getAccessToken()!=null) localBitcoinAction.connect(getAccessToken());
             if (TEST_MODE) localBitcoinAction.setTestMode(TEST_MODE);
         }
         return localBitcoinAction;
